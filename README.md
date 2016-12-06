@@ -1,2 +1,2 @@
-# bitcoin-exchange-3
-A bitcoin exchange written with TypeScript + Angular 2
+# Bitcoin Exchange
+A bitcoin exchange written with TypeScript + Angular 2 + Webpack 2
