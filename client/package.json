@@ -1,0 +1,52 @@
+{
+  "name": "typescript-angular-bitcoin-exchange-client",
+  "version": "0.0.1",
+  "description": "Client-side code for bitcoin exchange",
+  "author": "Dean Kerr <dean_k@live.co.uk>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oriondean/typescript-angular-bitcoin-exchange"
+  },
+  "bugs": {
+    "url": "https://github.com/oriondean/typescript-angular-bitcoin-exchange/issues"
+  },
+  "keywords": [
+    "bitcoin",
+    "bitcoin-exchange",
+    "bitcoin-exchange-seed"
+  ],
+  "dependencies": {
+    "@angular/common": "~2.2.4",
+    "@angular/compiler": "~2.2.4",
+    "@angular/core": "~2.2.4",
+    "@angular/forms": "~2.2.4",
+    "@angular/http": "~2.2.4",
+    "@angular/platform-browser": "~2.2.4",
+    "@angular/platform-browser-dynamic": "~2.2.4",
+    "@angular/router": "~3.2.4",
+    "bootstrap": "^3.3.6",
+    "rxjs": "5.0.0-beta.12",
+    "socket.io-client": "^1.4.4",
+    "typescript": "~2.0.10",
+    "zone.js": "^0.6.26"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "3.0.0-beta.9",
+    "css-loader": "^0.23.1",
+    "eslint": "^2.5.3",
+    "eslint-loader": "^1.3.0",
+    "html-loader": "^0.4.0",
+    "node-sass": "^3.4.2",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "tslint": "^4.0.2",
+    "tslint-loader": "^3.3.0",
+    "webpack": "^2.1.0-beta.27"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --output-public-path build",
+    "build": "webpack"
+  },
+  "private": true,
+  "license": "MIT"
+}
