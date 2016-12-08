@@ -23,6 +23,7 @@
       "selenium-webdriver",
       "source-map",
       "uglify-js",
+      "socket.io-client",
       "webpack"
     ]
   },
