@@ -1,20 +1,27 @@
 import { Component } from '@angular/core';
 import { Order } from './order';
+import {OrderEntryService} from "./order-entry.service";
+import {AccountService} from "../account.service";
 
 @Component({
     selector: 'order-entry',
-    styleUrls: ['order-entry.css'],
-    templateUrl: './order-entry.html'
+    styleUrls: ['./order-entry.css'],
+    templateUrl: './order-entry.html',
+    providers: [OrderEntryService, AccountService]
 })
 export class OrderEntryComponent {
-    model = new Order(0, 0);
-    invalid = true;
+    model: Order = new Order(0, 0, 'bid', this.accountService.account);
+
+    constructor(private orderEntryService: OrderEntryService, private accountService: AccountService) {
+    }
 
     placeBid() {
-        console.log('place bid');
+        this.model.action = 'bid';
+        this.orderEntryService.placeOrder(this.model);
     }
 
     placeAsk() {
-        console.log('place ask');
+        this.model.action = 'ask';
+        this.orderEntryService.placeOrder(this.model);
     }
 }
