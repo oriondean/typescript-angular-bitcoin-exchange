@@ -10,7 +10,7 @@ import {AccountService} from "../account.service";
     providers: [OrderEntryService, AccountService]
 })
 export class OrderEntryComponent {
-    model: Order = new Order(0, 0, 'bid', this.accountService.account);
+    private model: Order = new Order(0, 0, 'bid', this.accountService.account);
 
     constructor(private orderEntryService: OrderEntryService, private accountService: AccountService) {
     }
