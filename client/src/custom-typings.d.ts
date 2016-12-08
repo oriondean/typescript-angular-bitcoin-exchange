@@ -120,8 +120,14 @@ interface WebpackContext extends WebpackRequire {
     keys(): string[];
 }
 
+interface ErrorStackTraceLimit {
+    stackTraceLimit: number;
+}
+
+
 // Extend typings
 interface NodeRequire extends WebpackRequire {}
+interface ErrorConstructor extends ErrorStackTraceLimit {}
 interface NodeRequireFunction extends Es6PromiseLoader  {}
 interface NodeModule extends WebpackModule {}
 interface Global extends GlobalEnvironment  {}
