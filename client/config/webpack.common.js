@@ -96,11 +96,7 @@ module.exports = function (options) {
                  */
                 {
                     test: /\.ts$/,
-                    use: [
-                        'awesome-typescript-loader',
-                        'angular2-template-loader',
-                        'angular-router-loader'
-                    ],
+                    use: ['awesome-typescript-loader', 'angular2-template-loader'],
                     exclude: [/\.(spec|e2e)\.ts$/]
                 },
 
