@@ -1,0 +1,18 @@
+<div class="order-entry-container panel-container">
+    <h5 class="header">ORDER ENTRY</h5>
+    <form class="order-entry-form form-inline" name="form" #orderEntry="ngForm">
+        <input type="number" class="form-control" id="quantity-field" #name="ngModel"
+               placeholder="Quantity" [(ngModel)]="model.quantity" name="quantity" required />
+        <input type="number" class="form-control" id="price-field" #name="ngModel"
+               placeholder="Price" [(ngModel)]="model.price" name="price" required />
+        <button type="button" class="btn btn-default disabled" disabled>Limit</button>
+        <button type="button"
+                class="btn btn-default btn-bid bid right"
+                (click)=placeBid()
+                [disabled]="!orderEntry.form.valid">Place Bid</button>
+        <button type="button"
+                class="btn btn-default btn-ask ask right"
+                (click)=placeAsk()
+                [disabled]="!orderEntry.form.valid">Place Ask</button>
+    </form>
+</div>
