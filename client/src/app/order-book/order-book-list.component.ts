@@ -15,7 +15,7 @@ export class OrderBookListComponent {
     ];
 
     constructor(private orderBookService: OrderBookService) {
-        console.log('orders: ', orderBookService.orders);
+        orderBookService.subscribe((orders: OrderBookOrder[]) => this.orders = orders);
     }
 
     trackByFn(index: number, item: OrderBookOrder) {

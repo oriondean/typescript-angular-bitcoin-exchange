@@ -9,6 +9,6 @@ export class OrderEntryService {
     }
 
     placeOrder(order: OrderEntryOrder) {
-        this.socketService.socket.emit('order', order);
+        this.socketService.emit('order', order);
     }
 }
