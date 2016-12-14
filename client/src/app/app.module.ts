@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { OrderEntryComponent } from './order-entry/order-entry.component';
 import { SocketService } from "./socket.service";
 import { AccountService } from "./account.service";
+import { OrderBookModule } from './order-book/order-book.module';
+import { OrderEntryModule } from './order-entry/order-entry.module';
 
 @NgModule({
     bootstrap: [AppComponent],
-    declarations: [AppComponent, OrderEntryComponent],
-    imports: [BrowserModule, FormsModule],
+    declarations: [AppComponent],
+    imports: [BrowserModule, OrderEntryModule, OrderBookModule],
     providers: [SocketService, AccountService]
 })
 export class AppModule {}

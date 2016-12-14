@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {SocketService} from "../socket.service";
-import {Order} from "./order";
+import {OrderEntryOrder} from "./order-entry-order";
 
 @Injectable()
 export class OrderEntryService {
@@ -8,7 +8,7 @@ export class OrderEntryService {
 
     }
 
-    placeOrder(order: Order) {
+    placeOrder(order: OrderEntryOrder) {
         this.socketService.socket.emit('order', order);
     }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Order } from './order';
+import { OrderEntryOrder } from './order-entry-order';
 import {OrderEntryService} from "./order-entry.service";
 import {AccountService} from "../account.service";
 
@@ -10,7 +10,7 @@ import {AccountService} from "../account.service";
     providers: [OrderEntryService, AccountService]
 })
 export class OrderEntryComponent {
-    private model: Order = new Order(0, 0, 'bid', this.accountService.account);
+    private model: OrderEntryOrder = new OrderEntryOrder(0, 0, 'bid', this.accountService.account);
 
     constructor(private orderEntryService: OrderEntryService, private accountService: AccountService) {
     }

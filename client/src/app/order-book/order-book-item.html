@@ -1,0 +1,19 @@
+<div class="order-book-item">
+    <div class="id">ORDER {{order.id}}</div>
+    <div class="quantity">
+        <span class="initial">
+            <span class="quantity-header">Quantity</span><br/>
+            <span class="value">{{order.quantity.toFixed(9)}}</span>
+        </span>
+        <span class="remaining">
+            <span class="remaining-header">Remaining</span><br/>
+            <span class="value">{{order.quantity.toFixed(9)}}</span>
+        </span>
+    </div>
+    <div class="pricing">
+        <span class="action" [class]="order.action">{{order.action.toUpperCase()}}</span>
+        @
+        <span class="price">{{order.price.toFixed(3)}}</span>
+    </div>
+    <div class="time">{{order.created}}</div>
+</div>

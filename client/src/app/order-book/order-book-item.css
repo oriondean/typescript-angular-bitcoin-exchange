@@ -1,0 +1,8 @@
+.order-book-item { border: 1px solid #37474F; display: inline-block; margin: 4px;   }
+.order-book-item .id { background-color: #546E7A; font-weight: bold; color: white; text-align: center; }
+.order-book-item .quantity > span { display: inline-block; border-bottom: 1px solid #37474F; padding: 0 5px; text-align: center; }
+.order-book-item .quantity > span:first-child { border-right: 1px solid #37474F; }
+.order-book-item .quantity-header, .order-book-item .remaining-header { font-weight: bold; }
+.order-book-item .pricing { border-bottom: 1px solid #37474F; text-align: center; }
+.order-book-item .pricing .price { font-weight: bold; }
+.order-book-item .time { font-style: italic; text-align: center; }
