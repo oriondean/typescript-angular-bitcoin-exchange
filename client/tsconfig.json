@@ -23,7 +23,9 @@
       "selenium-webdriver",
       "source-map",
       "uglify-js",
+      "rx",
       "socket.io-client",
+      "underscore"
       "webpack"
     ]
   },
