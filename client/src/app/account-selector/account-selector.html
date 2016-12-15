@@ -1,0 +1,8 @@
+<div class="account-selector-container panel-container">
+    <h5 class="header">ACCOUNT SELECTOR</h5>
+    <select name="account-selector"
+            class="form-control"
+            (change)="onChange($event.target.value)">
+        <option *ngFor="let account of accounts">{{account}}</option>
+    </select>
+</div>
