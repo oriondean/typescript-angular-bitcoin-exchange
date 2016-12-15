@@ -1,3 +1,38 @@
-<account-selector></account-selector>
-<order-entry></order-entry>
-<order-book-list></order-book-list>
+<nav class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Bitcoin Exchange</a>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2">
+            <!--<OrderDepth side={OrderAction.ASK} depth={this.props.askDepth} subscribe={this.props.subscribeOrderDepth} />-->
+            <!--<OrderDepth side={OrderAction.BID} depth={this.props.bidDepth} subscribe={this.props.subscribeOrderDepth} />-->
+        </div>
+        <div class="col-lg-7 main">
+            <div class="row">
+                <div class="col-lg-9">
+                    <order-entry></order-entry>
+                </div>
+                <div class="col-lg-3">
+                    <account-selector></account-selector>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--<OrderDepthChart bidDepth={this.props.bidDepth} askDepth={this.props.askDepth} />-->
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <!--<TradeHistory trades={this.props.trades} subscribe={this.props.subscribeTradeHistory} />-->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <order-book-list></order-book-list>
+        </div>
+    </div>
+</div>

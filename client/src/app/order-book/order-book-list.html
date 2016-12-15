@@ -1,3 +1,6 @@
-<div class="order-book-list">
-    <order-book-item *ngFor="let order of orders; trackBy: trackByFn " [order]="order"></order-book-item>
+<div class="order-book-container panel-container">
+    <h5 class="header">MY ORDERS</h5>
+    <div class="order-book-list">
+        <order-book-item *ngFor="let order of orders; trackBy: trackByFn " [order]="order"></order-book-item>
+    </div>
 </div>
