@@ -1,0 +1,17 @@
+<div class="trade-history-container panel-container">
+    <h5 class="header">TRADE HISTORY</h5>
+    <div class="history-header">
+        <span class="price right">Price</span>
+        <span class="quantity right">Quantity</span>
+        <span class="aggressor">Aggressor</span>
+        <span class="time right">Time</span>
+    </div>
+    <div class="trade-history">
+        <div class="trade" *ngFor="let trade of trades">
+            <span class="price right">{{trade.price.toFixed(3)}}</span>
+            <span class="quantity right">{{trade.quantity.toFixed(9)}}</span>
+            <span class="aggressor">{{trade.aggressor.toUpperCase()}}</span>
+            <span class="time right">{{trade.created}}</span>
+        </div>
+    </div>
+</div>
