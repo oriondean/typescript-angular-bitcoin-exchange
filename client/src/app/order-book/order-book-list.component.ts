@@ -9,10 +9,7 @@ import {OrderBookOrder} from "./order-book-order";
     providers: [OrderBookService]
 })
 export class OrderBookListComponent {
-    private orders: OrderBookOrder[] = [
-        new OrderBookOrder(10, 15, 'bid', 'dkerr', 1, '24 minutes ago'),
-        new OrderBookOrder(25, 16, 'ask', 'dkerr', 2, '25 minutes ago')
-    ];
+    private orders: OrderBookOrder[] = [];
 
     constructor(private orderBookService: OrderBookService) {
         orderBookService.subscribe((orders: OrderBookOrder[]) => this.orders = orders);
