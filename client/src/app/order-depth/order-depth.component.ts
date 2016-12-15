@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { OrderDepthOrder } from "./order-depth-order";
+import { OrderDepthOrder } from './order-depth-order';
+import { OrderDepthService, OrderDepth } from './order-depth.service';
+import * as _ from 'underscore';
 
 @Component({
     selector: 'order-depth',
@@ -10,16 +12,16 @@ export class OrderDepthComponent {
     @Input() private side: string;
     private isBid: boolean;
 
-    private orders: OrderDepthOrder[] = [
-        new OrderDepthOrder(15, 10),
-        new OrderDepthOrder(16, 10),
-        new OrderDepthOrder(17, 10)
-    ];
+    private orders: OrderDepthOrder[] = [];
 
-    constructor() {
+    constructor(private orderDepthService: OrderDepthService) {
     }
 
     ngOnInit() {
         this.isBid = this.side === 'bid';
+
+        this.orderDepthService.subscribe(this.side, (depth: OrderDepth) => {
+            this.orders = _.map(depth, (value: number, key: string) => ({ price: Number(key), quantity: value }));
+        })
     }
 }

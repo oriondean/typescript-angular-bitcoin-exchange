@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SocketService, OrderBookUpdate } from '../socket.service';
+import { SocketService } from '../socket.service';
 import { AccountService } from '../account.service';
 import { OrderBookOrder } from './order-book-order';
 import * as Rx from 'rxjs';
@@ -14,6 +14,11 @@ const UPDATES = {
 
 const NAMESPACE: string = 'private-order-book';
 
+interface OrderBookUpdate {
+    updateType: string;
+    data: OrderBookOrder | OrderBookOrder[]
+}
+
 @Injectable()
 export class OrderBookService {
 
@@ -22,23 +27,7 @@ export class OrderBookService {
     private subject: Rx.Subject<{}> = new Rx.Subject();
 
     constructor(private socketService: SocketService, private accountService: AccountService) {
-        this.socketService.on('private-order-book').subscribe((update: OrderBookUpdate) => {
-            if (update.updateType === UPDATES.REFRESH) {
-                this.orders = update.data.reduce((map, order) => {
-                    map[order.id] = order;
-                    return map;
-                }, {});
-            } else if (update.updateType === UPDATES.ADD_ORDER) {
-                this.orders[update.data.id] = update.data;
-            } else if (update.updateType === UPDATES.CHANGE_ORDER) {
-                this.orders[update.data.id] = update.data;
-            } else if (update.updateType === UPDATES.REMOVE_ORDER) {
-                delete this.orders[update.data.id];
-            }
-            
-            this.subject.next(_.values(this.orders));
-        });
-
+        this.socketService.on('private-order-book').subscribe((update) => this.handleUpdate(update));
         this.socketService.emit(NAMESPACE, this.accountService.account); // subscribe
 
         this.accountService.subscribe(() => {
@@ -47,7 +36,27 @@ export class OrderBookService {
         })
     }
 
+    private handleUpdate(update: OrderBookUpdate) {
+        if (update.updateType === UPDATES.REFRESH) {
+            const data: OrderBookOrder[] = <OrderBookOrder[]> update.data;
+            this.orders = data.reduce((map, order) => {
+                map[order.id] = order;
+                return map;
+            }, {});
+        } else {
+            const data: OrderBookOrder = <OrderBookOrder> update.data;
 
+            if (update.updateType === UPDATES.ADD_ORDER) {
+                this.orders[data.id] = data;
+            } else if (update.updateType === UPDATES.CHANGE_ORDER) {
+                this.orders[data.id] = data;
+            } else if (update.updateType === UPDATES.REMOVE_ORDER) {
+                delete this.orders[data.id];
+            }
+        }
+
+        this.subject.next(_.values(this.orders));
+    }
 
     subscribe(callback: (orders: OrderBookOrder[]) => any) {
         return this.subject.subscribe({ next: callback });
