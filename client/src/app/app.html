@@ -8,8 +8,8 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-2">
-            <!--<OrderDepth side={OrderAction.ASK} depth={this.props.askDepth} subscribe={this.props.subscribeOrderDepth} />-->
-            <!--<OrderDepth side={OrderAction.BID} depth={this.props.bidDepth} subscribe={this.props.subscribeOrderDepth} />-->
+            <order-depth [side]="'bid'"></order-depth>
+            <order-depth [side]="'ask'"></order-depth>
         </div>
         <div class="col-lg-7 main">
             <div class="row">

@@ -7,11 +7,12 @@ import { AccountService } from './account.service';
 import { OrderBookModule } from './order-book/order-book.module';
 import { OrderEntryModule } from './order-entry/order-entry.module';
 import { AccountSelectorModule } from './account-selector/account-selector.module';
+import { OrderDepthModule } from './order-depth/order-depth.module';
 
 @NgModule({
     bootstrap: [AppComponent],
     declarations: [AppComponent],
-    imports: [BrowserModule, OrderEntryModule, OrderBookModule, AccountSelectorModule],
+    imports: [BrowserModule, OrderEntryModule, OrderBookModule, OrderDepthModule, AccountSelectorModule],
     providers: [SocketService, AccountService]
 })
 export class AppModule {}

@@ -1,0 +1,12 @@
+<div class="aggregated-order-book-container panel-container">
+    <h5 class="header">ORDER DEPTH</h5>
+    <div class="book-header">
+        <span class="price right">Market Size</span><span class="quantity right">Price</span>
+    </div>
+    <div class="aggregated-order-book">
+        <div class="tier" *ngFor="let order of orders;">
+            <span class="quantity right">{{order.quantity.toFixed(9)}}</span>
+            <span class="price right" [class.bid]="isBid" [class.ask]="!isBid">{{order.price.toFixed(3)}}</span>
+        </div>
+    </div>
+</div>
