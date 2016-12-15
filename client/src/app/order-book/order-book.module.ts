@@ -6,8 +6,6 @@ import { OrderBookItemComponent } from "./order-book-item.component";
 import { OrderBookService } from "./order-book.service";
 import { OrderBookListComponent } from './order-book-list.component';
 
-
-
 @NgModule({
     imports: [FormsModule, CommonModule],
     declarations: [OrderBookItemComponent, OrderBookListComponent],
