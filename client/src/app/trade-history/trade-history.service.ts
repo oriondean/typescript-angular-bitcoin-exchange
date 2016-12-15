@@ -2,16 +2,12 @@ import { Injectable } from '@angular/core';
 import { SocketService } from '../socket.service';
 import { Trade } from './trade';
 import * as Rx from 'rxjs';
+import { ISocketUpdate } from '../ISocketUpdate';
 
 const UPDATES = {
     REFRESH: 'initial',
     ADD_TRADE: 'new'
 };
-
-export interface TradeHistoryUpdate {
-    updateType: string;
-    data: Trade | Trade[];
-}
 
 @Injectable()
 export class TradeHistoryService {
@@ -22,14 +18,14 @@ export class TradeHistoryService {
 
     constructor(private socketService: SocketService) {
         this.socketService.emit('trade-history')
-            .on('trade-history').subscribe((update: TradeHistoryUpdate) => this.handleUpdate(update));
+            .on('trade-history').subscribe((update: ISocketUpdate<Trade | Trade[]>) => this.handleUpdate(update));
     }
 
-    handleUpdate(update: TradeHistoryUpdate) {
-        if (update.updateType === UPDATES.REFRESH) {
-            this.tradeHistory = <Trade[]>update.data;
-        } else if (update.updateType === UPDATES.ADD_TRADE) {
-            this.tradeHistory.unshift(<Trade>update.data);
+    handleUpdate(update: ISocketUpdate<Trade | Trade[]>) {
+        if (update.type === UPDATES.REFRESH) {
+            this.tradeHistory = <Trade[]> update.data;
+        } else if (update.type === UPDATES.ADD_TRADE) {
+            this.tradeHistory.unshift(<Trade> update.data);
         }
 
         this.subject.next(this.tradeHistory);

@@ -4,6 +4,7 @@ import { AccountService } from '../account.service';
 import { OrderBookOrder } from './order-book-order';
 import * as Rx from 'rxjs';
 import * as _ from 'underscore';
+import { ISocketUpdate } from '../ISocketUpdate';
 
 const UPDATES = {
     REFRESH: 'initial',
@@ -12,15 +13,8 @@ const UPDATES = {
     REMOVE_ORDER: 'removed'
 };
 
-const NAMESPACE: string = 'private-order-book';
-
 interface OrderBook {
     [id: number]: OrderBookOrder
-}
-
-interface OrderBookUpdate {
-    updateType: string;
-    data: OrderBookOrder | OrderBookOrder[];
 }
 
 @Injectable()
@@ -31,18 +25,20 @@ export class OrderBookService {
     private subject: Rx.Subject<OrderBook> = new Rx.Subject<OrderBook>();
 
     constructor(private socketService: SocketService, private accountService: AccountService) {
-        this.socketService.on('private-order-book').subscribe((update) => this.handleUpdate(update));
-        this.socketService.emit(NAMESPACE, this.accountService.account); // subscribe
+        this.socketService.emit('private-order-book', this.accountService.account)
+            .on<OrderBookOrder | OrderBookOrder[]>('private-order-book')
+            .subscribe((update) => this.handleUpdate(update));
 
         this.accountService.subscribe(() => {
             this.orders = [];
-            this.socketService.emit(NAMESPACE, this.accountService.account); // subscribe
+            this.socketService.emit('private-order-book', this.accountService.account); // subscribe
         })
     }
 
-    private handleUpdate(update: OrderBookUpdate) {
-        if (update.updateType === UPDATES.REFRESH) {
+    private handleUpdate(update: ISocketUpdate<OrderBookOrder | OrderBookOrder[]>) {
+        if (update.type === UPDATES.REFRESH) {
             const data: OrderBookOrder[] = <OrderBookOrder[]> update.data;
+
             this.orders = data.reduce((map, order) => {
                 map[order.id] = order;
                 return map;
@@ -50,11 +46,11 @@ export class OrderBookService {
         } else {
             const data: OrderBookOrder = <OrderBookOrder> update.data;
 
-            if (update.updateType === UPDATES.ADD_ORDER) {
+            if (update.type === UPDATES.ADD_ORDER) {
                 this.orders[data.id] = data;
-            } else if (update.updateType === UPDATES.CHANGE_ORDER) {
+            } else if (update.type === UPDATES.CHANGE_ORDER) {
                 this.orders[data.id] = data;
-            } else if (update.updateType === UPDATES.REMOVE_ORDER) {
+            } else if (update.type === UPDATES.REMOVE_ORDER) {
                 delete this.orders[data.id];
             }
         }
