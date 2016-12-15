@@ -14,17 +14,21 @@ const UPDATES = {
 
 const NAMESPACE: string = 'private-order-book';
 
+interface OrderBook {
+    [id: number]: OrderBookOrder
+}
+
 interface OrderBookUpdate {
     updateType: string;
-    data: OrderBookOrder | OrderBookOrder[]
+    data: OrderBookOrder | OrderBookOrder[];
 }
 
 @Injectable()
 export class OrderBookService {
 
-    public orders: { [id: number] : OrderBookOrder } = {};
+    public orders: OrderBook = {};
 
-    private subject: Rx.Subject<{}> = new Rx.Subject();
+    private subject: Rx.Subject<OrderBook> = new Rx.Subject<OrderBook>();
 
     constructor(private socketService: SocketService, private accountService: AccountService) {
         this.socketService.on('private-order-book').subscribe((update) => this.handleUpdate(update));
