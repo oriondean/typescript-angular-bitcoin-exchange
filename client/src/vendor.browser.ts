@@ -17,3 +17,6 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/mergeMap';
 
 import 'socket.io-client';
+
+import 'd3';
+import 'd3fc';
