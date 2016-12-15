@@ -12,6 +12,8 @@ const UPDATES = {
     REMOVE_ORDER: 'removed'
 };
 
+const NAMESPACE: string = 'private-order-book';
+
 @Injectable()
 export class OrderBookService {
 
@@ -20,8 +22,6 @@ export class OrderBookService {
     private subject: Rx.Subject<{}> = new Rx.Subject();
 
     constructor(private socketService: SocketService, private accountService: AccountService) {
-        this.socketService.emit('private-order-book', this.accountService.account); // subscribe
-
         this.socketService.on('private-order-book').subscribe((update: OrderBookUpdate) => {
             if (update.updateType === UPDATES.REFRESH) {
                 this.orders = update.data.reduce((map, order) => {
@@ -38,7 +38,16 @@ export class OrderBookService {
             
             this.subject.next(_.values(this.orders));
         });
+
+        this.socketService.emit(NAMESPACE, this.accountService.account); // subscribe
+
+        this.accountService.subscribe(() => {
+            this.orders = [];
+            this.socketService.emit(NAMESPACE, this.accountService.account); // subscribe
+        })
     }
+
+
 
     subscribe(callback: (orders: OrderBookOrder[]) => any) {
         return this.subject.subscribe({ next: callback });
