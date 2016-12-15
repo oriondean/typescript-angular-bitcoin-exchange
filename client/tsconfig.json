@@ -25,7 +25,7 @@
       "uglify-js",
       "rx",
       "socket.io-client",
-      "underscore"
+      "underscore",
       "webpack"
     ]
   },
