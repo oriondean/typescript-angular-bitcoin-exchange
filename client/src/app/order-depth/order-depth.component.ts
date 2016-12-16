@@ -20,8 +20,14 @@ export class OrderDepthComponent {
     ngOnInit() {
         this.isBid = this.side === 'bid';
 
-        this.orderDepthService.subscribe(this.side, (depth: OrderDepth) => {
-            this.orders = _.map(depth, (value: number, key: string) => ({ price: Number(key), quantity: value }));
-        })
+        if (this.isBid) {
+            this.orderDepthService.subscribeBid((depth: OrderDepth) => this.handleDepthUpdate(depth));
+        } else {
+            this.orderDepthService.subscribeAsk((depth: OrderDepth) => this.handleDepthUpdate(depth));
+        }
+    }
+
+    private handleDepthUpdate(depth: OrderDepth) {
+        this.orders = _.map(depth, (value: number, key: string) => ({ price: Number(key), quantity: value }));
     }
 }

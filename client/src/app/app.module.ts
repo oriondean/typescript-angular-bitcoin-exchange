@@ -9,12 +9,13 @@ import { OrderEntryModule } from './order-entry/order-entry.module';
 import { AccountSelectorModule } from './account-selector/account-selector.module';
 import { OrderDepthModule } from './order-depth/order-depth.module';
 import { TradeHistoryModule } from './trade-history/trade-history.module';
+import { OrderDepthChartModule } from './order-depth-chart/order-depth-chart.module';
 
 @NgModule({
     bootstrap: [AppComponent],
     declarations: [AppComponent],
     imports: [BrowserModule, OrderEntryModule, OrderBookModule, OrderDepthModule,
-        AccountSelectorModule, TradeHistoryModule],
+        AccountSelectorModule, TradeHistoryModule, OrderDepthChartModule],
     providers: [SocketService, AccountService]
 })
 export class AppModule {}

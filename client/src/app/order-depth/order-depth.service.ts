@@ -15,7 +15,7 @@ export interface OrderDepth {
     [tier: string]: number
 }
 
-interface OrderDepths {
+export interface OrderDepths {
     bid: OrderDepth;
     ask: OrderDepth;
 }
@@ -23,8 +23,9 @@ interface OrderDepths {
 @Injectable()
 export class OrderDepthService {
 
-    private depth: OrderDepths = { bid: {}, ask: {} };
+    public depth: OrderDepths = { bid: {}, ask: {} };
 
+    private subject: Subject<OrderDepths> = new Subject<OrderDepths>();
     private bidSubject: Subject<OrderDepth> = new Subject<OrderDepth>();
     private askSubject: Subject<OrderDepth> = new Subject<OrderDepth>();
 
@@ -47,10 +48,19 @@ export class OrderDepthService {
             delete this.depth[update.orderAction][key];
         }
 
+        this.subject.next(this.depth);
         update.orderAction === 'bid' ? this.bidSubject.next(this.depth.bid) : this.askSubject.next(this.depth.ask);
     }
 
-    subscribe(side: string, callback: (value: OrderDepth) => void) {
-        return side === 'bid' ? this.bidSubject.subscribe(callback) : this.askSubject.subscribe(callback);
+    subscribeBid(callback: (value: OrderDepth) => void) {
+        return this.bidSubject.subscribe(callback);
+    }
+
+    subscribeAsk(callback: (value: OrderDepth) => void) {
+        return this.askSubject.subscribe(callback);
+    }
+
+    subscribe(callback: (value: OrderDepths) => void) {
+        return this.subject.subscribe(callback);
     }
 }
