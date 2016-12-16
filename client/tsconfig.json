@@ -27,7 +27,7 @@
       "socket.io-client",
       "underscore",
       "webpack",
-      "d3fc"
+      "d3"
     ]
   },
   "exclude": [
