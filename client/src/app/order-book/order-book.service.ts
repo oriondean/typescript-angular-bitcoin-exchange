@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SocketService } from '../socket.service';
 import { AccountService } from '../account.service';
 import { OrderBookOrder } from './order-book-order';
-import * as Rx from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import * as _ from 'underscore';
 import { ISocketUpdate } from '../ISocketUpdate';
 
@@ -22,7 +22,7 @@ export class OrderBookService {
 
     public orders: OrderBook = {};
 
-    private subject: Rx.Subject<OrderBook> = new Rx.Subject<OrderBook>();
+    private subject: Subject<OrderBook> = new Subject<OrderBook>();
 
     constructor(private socketService: SocketService, private accountService: AccountService) {
         this.socketService.emit('private-order-book', this.accountService.account)

@@ -1,12 +1,12 @@
-import {Injectable} from "@angular/core";
-import * as Rx from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class AccountService {
     public accounts: string[] = ['dkerr', 'bgates', 'dtrump', 'ashearer', 'emusk', 'jmadden'];
     public account: string = this.accounts[0];
 
-    private subject: Rx.Subject<{}> = new Rx.Subject();
+    private subject: Subject<{}> = new Subject();
 
     constructor() {
     }

@@ -1,7 +1,8 @@
 import * as io from 'socket.io-client';
-import {Injectable} from "@angular/core";
-import * as Rx from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { ISocketUpdate } from './ISocketUpdate';
+import { Observer } from 'rxjs/Observer';
 
 @Injectable()
 export class SocketService {
@@ -17,7 +18,7 @@ export class SocketService {
     }
 
     on<T>(subject: string) {
-        return Rx.Observable.create((observer: Rx.Observer<ISocketUpdate<T>>) => {
+        return Observable.create((observer: Observer<ISocketUpdate<T>>) => {
             this.socket.on(subject, function(type: string, orderAction: any, data: T) {
                 if (arguments.length === 2) {
                     observer.next({ type, data: orderAction })

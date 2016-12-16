@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from '../socket.service';
 import { Trade } from './trade';
-import * as Rx from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { ISocketUpdate } from '../ISocketUpdate';
 
 const UPDATES = {
@@ -14,7 +14,7 @@ export class TradeHistoryService {
 
     private tradeHistory: Trade[] = [];
 
-    private subject: Rx.Subject<Trade[]> = new Rx.Subject<Trade[]>();
+    private subject: Subject<Trade[]> = new Subject<Trade[]>();
 
     constructor(private socketService: SocketService) {
         this.socketService.emit('trade-history')

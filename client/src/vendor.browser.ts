@@ -14,9 +14,7 @@ import '@angular/router';
 
 // RxJS
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-
-import 'socket.io-client';
-
-import 'd3';
-import 'd3fc';
+import 'rxjs/add/operator/mergeMap'
+import 'rxjs/Subject';
+import 'rxjs/Observable';
+import 'rxjs/Observer';

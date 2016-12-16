@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SocketService } from '../socket.service';
-import * as Rx from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { OrderDepthOrder } from './order-depth-order';
 import { ISocketUpdate } from '../ISocketUpdate';
 
@@ -25,8 +25,8 @@ export class OrderDepthService {
 
     private depth: OrderDepths = { bid: {}, ask: {} };
 
-    private bidSubject: Rx.Subject<OrderDepth> = new Rx.Subject<OrderDepth>();
-    private askSubject: Rx.Subject<OrderDepth> = new Rx.Subject<OrderDepth>();
+    private bidSubject: Subject<OrderDepth> = new Subject<OrderDepth>();
+    private askSubject: Subject<OrderDepth> = new Subject<OrderDepth>();
 
     constructor(private socketService: SocketService) {
         this.socketService.emit('aggregated-order-book')
